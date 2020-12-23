@@ -1,8 +1,9 @@
 use sp_core::{Pair, Public, sr25519};
 use aegis_chain_runtime::{
 	AccountId, AuraConfig, BalancesConfig, GenesisConfig, GrandpaConfig,
-	SudoConfig, SystemConfig, WASM_BINARY, Signature
+	SudoConfig, SystemConfig, WASM_BINARY, Signature,EVMConfig,EthereumConfig,
 };
+use std::collections::BTreeMap;
 use sp_consensus_aura::sr25519::AuthorityId as AuraId;
 use sp_finality_grandpa::AuthorityId as GrandpaId;
 use sp_runtime::traits::{Verify, IdentifyAccount};
@@ -158,6 +159,10 @@ fn testnet_genesis(
                     enable_println,
                     ..Default::default()
             },
-        }),
+		}),
+		pallet_evm: Some(EVMConfig {
+			accounts: BTreeMap::new(),
+		}),
+		pallet_ethereum: Some(EthereumConfig {}),
 	}
 }
